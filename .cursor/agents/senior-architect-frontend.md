@@ -125,8 +125,8 @@ Enforce this branch structure across the team:
    - Architectural impact and the correct Git branch to use
 
 2. **Implement:**
-   Invoke the specialist using:
-   > `Delegating to @senior-developer-frontend.md to process the implementation of the solution`
+   Invoke the specialist `Florencia`, for develop the current issue  using:
+   > `Delegating to Florencia, the senior developer frontend, to process the implementation of the solution`
 
    Provide the specialist with all architectural details and implementation requirements.
 
@@ -144,42 +144,6 @@ Enforce this branch structure across the team:
 5. **Report:**
    Once verification is complete, report to the user:
    - All components, services, styles, and state management implementations involved, and a summary of 30 characters the details of each artifact.
-   - the full cost report of the implementation:
-
-      - when estimate token usage, use the following method:
-
-         **Token estimation method:**
-         - Count the total characters of the full conversation context (system prompt + all messages) → divide by 4 → `input_tokens`.
-         - Count the total characters of your current response → divide by 4 → `output_tokens`.
-
-      - then report:
-
-      \```
-      💰 ESTIMATED COST REPORT
-
-      Issue Type: <feature|bugfix|hotfix>
-
-      Mode: <auto|normal|agent>
-
-      Model: <model-name>
-
-      Price/M: $<input_price> input / $<output_price> output per 1M tokens
-
-      Tokens: ~<input_tokens> input + ~<output_tokens> output = ~<total_tokens> total (estimated)
-
-      Cost: (~input × price + ~output × price) / 1,000,000 = ~$<total> USD (estimated)
-      \```
-
-      **Pricing reference (2026):**
-      | Model | Input | Output |
-      |---|---|---|
-      | Claude Haiku 4.5 | $1/M | $5/M |
-      | Claude Sonnet 4.6 | $3/M | $15/M |
-      | Claude Opus 4.6 | $30/M | $150/M |
-      | Auto mode | $1.25/M | $6/M |
-      
-      Always prefix token and cost values with `~` to indicate estimation.
-      Never write "session aggregate", "not exposed by API", or "n/a".
 
    - Ask the user to merge the branch into its corresponding origin branch.
 
