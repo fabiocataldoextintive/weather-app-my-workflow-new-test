@@ -17,7 +17,7 @@ interface CacheEntry<T> {
 export class WeatherApiService {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = environment.weatherApiBaseUrl;
-  private readonly apiKey = environment.weatherApiKey;
+  private readonly apiKey = import.meta.env.NG_APP_WEATHER_API_KEY;
 
   // In-memory cache: city -> CacheEntry
   private readonly currentWeatherCache = new Map<
