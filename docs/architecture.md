@@ -124,4 +124,33 @@ All components use `ChangeDetectionStrategy.OnPush`. Data flows through:
 / → redirect to /weather
 /weather → WeatherPageComponent (lazy)
 /history → HistoryPageComponent (lazy)
+/favorites → FavoritesPageComponent (lazy)  [INT-41]
+```
+
+## i18n (INT-46)
+- `@ngx-translate/core` v16 + `@ngx-translate/http-loader` v16
+- Translation files: `src/app/i18n/en.json`, `src/app/i18n/es.json`
+- Served via Angular assets at `/app/i18n/*.json`
+- Configured via `provideTranslateService()` in `app.config.ts`
+- `LanguageSwitcherComponent` in nav persists selected language to localStorage (`appLanguage`)
+
+## PWA / Offline (INT-49)
+- `@angular/service-worker` registered in production builds only
+- `src/ngsw-config.json` configures prefetch (app shell) and lazy (i18n assets)
+- `OnlineStatusService` tracks online/offline via `signal()` + window events
+- `OfflineBannerComponent` shows dismissible banner when offline
+- `loadWeather$` effect guards API calls: if offline and cached data exists → return cache; else dispatch failure
+
+## State Shape (Updated)
+```typescript
+interface AppState {
+  weather: WeatherState;
+  history: HistoryState;
+  settings: SettingsState;
+  favorites: FavoritesState;  // INT-40
+}
+
+interface FavoritesState {
+  entries: FavoriteEntry[];
+}
 ```
