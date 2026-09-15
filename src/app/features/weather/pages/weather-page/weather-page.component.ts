@@ -6,9 +6,11 @@ import {
 } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { Store } from '@ngrx/store';
+import { TranslatePipe } from '@ngx-translate/core';
 import { WeatherActions } from '../../../../store/weather/weather.actions';
 import { HistoryActions } from '../../../../store/history/history.actions';
 import { SettingsActions } from '../../../../store/settings/settings.actions';
+import { FavoritesActions } from '../../../../store/favorites/favorites.actions';
 import {
   selectCurrentWeather,
   selectError,
@@ -29,6 +31,7 @@ import { ErrorMessageComponent } from '../../../../shared/components/error-messa
   standalone: true,
   imports: [
     AsyncPipe,
+    TranslatePipe,
     SearchBarComponent,
     IntervalSelectorComponent,
     WeatherTableComponent,
@@ -61,14 +64,14 @@ import { ErrorMessageComponent } from '../../../../shared/components/error-messa
       } @else {
         <div class="weather-page__table-section">
           <div class="weather-page__view-toggle">
-            <span class="weather-page__view-label">View:</span>
+            <span class="weather-page__view-label">{{ 'weather.view' | translate }}:</span>
             <button
               class="weather-page__toggle-btn"
               [class.weather-page__toggle-btn--active]="(viewMode$ | async) === 'table'"
               (click)="setViewMode('table')"
               type="button"
             >
-              Table
+              {{ 'weather.viewTable' | translate }}
             </button>
             <button
               class="weather-page__toggle-btn"
@@ -77,7 +80,7 @@ import { ErrorMessageComponent } from '../../../../shared/components/error-messa
               [disabled]="!(currentWeather$ | async)"
               type="button"
             >
-              Detail
+              {{ 'weather.viewDetail' | translate }}
             </button>
           </div>
 
@@ -107,6 +110,7 @@ export class WeatherPageComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(HistoryActions.loadHistory({}));
     this.store.dispatch(SettingsActions.loadSettings({}));
+    this.store.dispatch(FavoritesActions.loadFavorites({}));
   }
 
   retryLastSearch(): void {
@@ -123,8 +127,14 @@ export class WeatherPageComponent implements OnInit {
     this.store.dispatch(WeatherActions.setViewMode({ mode }));
   }
 
+  /**
+   * Handles city selection from the table.
+   * Dispatches selectCity for immediate feedback, loads weather, then switches to detail view.
+   * @param city - The selected city name
+   */
   onSelectCity(city: string): void {
     this.lastSearchCity = city;
+    this.store.dispatch(WeatherActions.selectCity({ city }));
     this.store.dispatch(WeatherActions.loadWeather({ city }));
     this.store.dispatch(WeatherActions.setViewMode({ mode: 'detail' }));
   }

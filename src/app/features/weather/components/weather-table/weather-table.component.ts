@@ -5,32 +5,33 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { HistoryEntry } from '../../../../core/models/history.model';
 import { TemperaturePipe } from '../../../../shared/pipes/temperature.pipe';
 
 @Component({
   selector: 'app-weather-table',
   standalone: true,
-  imports: [TemperaturePipe],
+  imports: [TemperaturePipe, TranslatePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="weather-table">
       @if (entries.length === 0) {
         <p class="weather-table__empty">
-          No weather data yet. Search for a city to get started.
+          {{ 'weather.noData' | translate }}
         </p>
       } @else {
         <div class="weather-table__wrapper">
           <table class="weather-table__table" role="grid" aria-label="Recent weather searches">
             <thead>
               <tr>
-                <th scope="col">City</th>
-                <th scope="col">Condition</th>
-                <th scope="col">Temp (°C)</th>
-                <th scope="col">Temp (°F)</th>
-                <th scope="col">Wind</th>
-                <th scope="col">Humidity</th>
-                <th scope="col">Local Time</th>
+                <th scope="col">{{ 'weather.condition' | translate }}</th>
+                <th scope="col">{{ 'weather.condition' | translate }}</th>
+                <th scope="col">{{ 'weather.temperature' | translate }} (°C)</th>
+                <th scope="col">{{ 'weather.temperature' | translate }} (°F)</th>
+                <th scope="col">{{ 'weather.wind' | translate }}</th>
+                <th scope="col">{{ 'weather.humidity' | translate }}</th>
+                <th scope="col">{{ 'weather.localTime' | translate }}</th>
               </tr>
             </thead>
             <tbody>
