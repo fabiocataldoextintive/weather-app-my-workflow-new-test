@@ -18,7 +18,7 @@ specialist <-> sub-agent
 If the task is implementation-related, invoke the specialist using:
 > `Delegating to Sabrina, to plan and process the full implementation of the frontend architecture.`.
 3. Always analyze the architectural impact before proposing code.
-4. **Report:** Once project or module is complete, show to the user the full cost report of the implementation, obtained from `Sabrina`.
+4. **Report:** Once project or module is complete, show to the user the full report of the implementation, obtained from `Sabrina`.
 
 
 # INTEGRATION RULES:
