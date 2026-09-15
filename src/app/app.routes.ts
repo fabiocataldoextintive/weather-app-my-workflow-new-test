@@ -21,6 +21,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'favorites',
+    loadComponent: () =>
+      import('./features/favorites/pages/favorites-page/favorites-page.component').then(
+        (m) => m.FavoritesPageComponent
+      ),
+  },
+  {
     path: '**',
     redirectTo: 'weather',
   },
