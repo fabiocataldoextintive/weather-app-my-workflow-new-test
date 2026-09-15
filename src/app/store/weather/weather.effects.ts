@@ -9,7 +9,7 @@ import {
   switchMap,
   withLatestFrom,
 } from 'rxjs/operators';
-import { AppUiError } from '../../core/models/app-ui-error.model';
+import { AppUiError, createAppUiError } from '../../core/models/app-ui-error.model';
 import { WeatherApiService } from '../../core/services/weather-api.service';
 import { HistoryActions } from '../history/history.actions';
 import { selectEntries } from '../history/history.selectors';
@@ -29,8 +29,33 @@ export const loadWeather$ = createEffect(
         store.select(selectIntervalMs)
       ),
       switchMap(([{ city }, historyEntries, intervalMs]) => {
-        // INT-43: Check cache via history lastUpdate
         const normalizedCity = city.toLowerCase().trim();
+
+        // INT-49: Guard API calls when device is offline
+        if (!navigator.onLine) {
+          const cachedEntry = historyEntries.find(
+            (e) => e.city.toLowerCase() === normalizedCity
+          );
+          if (cachedEntry) {
+            return of(
+              WeatherActions.loadWeatherSuccess({
+                weather: cachedEntry.weather,
+                city,
+              })
+            );
+          }
+          return of(
+            WeatherActions.loadWeatherFailure({
+              error: createAppUiError(
+                'NETWORK_ERROR',
+                'Network error. Please check your connection.',
+                true
+              ),
+            })
+          );
+        }
+
+        // INT-43: Check cache via history lastUpdate
         const historyEntry = historyEntries.find(
           (e) => e.city.toLowerCase() === normalizedCity
         );

@@ -4,8 +4,10 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { AsyncPipe, DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { TranslatePipe } from '@ngx-translate/core';
 import { selectEntries } from '../../../../store/history/history.selectors';
 import { WeatherActions } from '../../../../store/weather/weather.actions';
 import { HistoryEntry } from '../../../../core/models/history.model';
@@ -16,13 +18,13 @@ const PAGE_SIZE = 10;
 @Component({
   selector: 'app-history-list',
   standalone: true,
-  imports: [AsyncPipe, DatePipe, TemperaturePipe],
+  imports: [AsyncPipe, DatePipe, TemperaturePipe, TranslatePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="history-list">
-      <h2 class="history-list__title">Recent Searches</h2>
+      <h2 class="history-list__title">{{ 'history.title' | translate }}</h2>
       @if ((entries$ | async)?.length === 0) {
-        <p class="history-list__empty">No recent searches yet.</p>
+        <p class="history-list__empty">{{ 'history.empty' | translate }}</p>
       } @else {
         <ul class="history-list__items" role="list">
           @for (entry of pagedEntries(); track entry.city) {
@@ -64,7 +66,7 @@ const PAGE_SIZE = 10;
               type="button"
               (click)="loadMore()"
             >
-              Load more
+              {{ 'history.loadMore' | translate }}
             </button>
           </div>
         }
@@ -75,11 +77,11 @@ const PAGE_SIZE = 10;
 })
 export class HistoryListComponent {
   private readonly store = inject(Store);
+  private readonly router = inject(Router);
   private allEntries: HistoryEntry[] = [];
   private page = signal(1);
 
   readonly entries$ = this.store.select(selectEntries);
-
   readonly pagedEntries = signal<HistoryEntry[]>([]);
   readonly hasMore = signal(false);
 
@@ -101,7 +103,12 @@ export class HistoryListComponent {
     this.updatePaged();
   }
 
+  /**
+   * Dispatches weather load for the selected city and navigates to the weather page.
+   * @param entry - The history entry to load weather for
+   */
   loadCity(entry: HistoryEntry): void {
     this.store.dispatch(WeatherActions.loadWeather({ city: entry.city }));
+    this.router.navigate(['/weather']);
   }
 }

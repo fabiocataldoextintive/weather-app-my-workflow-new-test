@@ -28,6 +28,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/app/i18n",
+                "output": "app/i18n"
               }
             ],
             "styles": [
@@ -48,7 +53,9 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "serviceWorker": true,
+              "ngswConfigPath": "src/ngsw-config.json"
             },
             "development": {
               "optimization": false,

@@ -7,17 +7,16 @@ import {
   signal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { WeatherActions } from '../../../../store/weather/weather.actions';
-import {
-  selectSuggestions,
-} from '../../../../store/weather/weather.selectors';
 import { AsyncPipe } from '@angular/common';
+import { Store } from '@ngrx/store';
+import { TranslateService, TranslatePipe } from '@ngx-translate/core';
+import { WeatherActions } from '../../../../store/weather/weather.actions';
+import { selectSuggestions } from '../../../../store/weather/weather.selectors';
 
 @Component({
   selector: 'app-search-bar',
   standalone: true,
-  imports: [FormsModule, AsyncPipe],
+  imports: [FormsModule, AsyncPipe, TranslatePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="search-bar">
@@ -25,7 +24,7 @@ import { AsyncPipe } from '@angular/common';
         <input
           class="search-bar__input"
           type="text"
-          [placeholder]="'Search for a city...'"
+          [placeholder]="'search.placeholder' | translate"
           [(ngModel)]="query"
           (ngModelChange)="onQueryChange($event)"
           (keydown.enter)="onSubmit()"
@@ -47,7 +46,7 @@ import { AsyncPipe } from '@angular/common';
           class="search-bar__submit"
           type="button"
           (click)="onSubmit()"
-          aria-label="Search"
+          [attr.aria-label]="'search.button' | translate"
         >
           🔍
         </button>
@@ -77,6 +76,7 @@ import { AsyncPipe } from '@angular/common';
 })
 export class SearchBarComponent implements OnInit, OnDestroy {
   private readonly store = inject(Store);
+  private readonly translateService = inject(TranslateService);
 
   readonly suggestions$ = this.store.select(selectSuggestions);
   readonly showSuggestions = signal(false);
@@ -98,7 +98,9 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     const trimmed = this.query.trim();
     if (!trimmed) {
-      this.validationError.set('Please enter a city name to search.');
+      this.validationError.set(
+        this.translateService.instant('search.empty')
+      );
       return;
     }
     this.validationError.set(null);
@@ -127,6 +129,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {}
+
   ngOnDestroy(): void {
     this.store.dispatch(WeatherActions.loadSuggestionsClear());
   }

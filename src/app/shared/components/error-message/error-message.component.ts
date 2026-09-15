@@ -5,11 +5,13 @@ import {
   Input,
   Output,
 } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { AppUiError } from '../../../core/models/app-ui-error.model';
 
 @Component({
   selector: 'app-error-message',
   standalone: true,
+  imports: [TranslatePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     @if (error) {
@@ -21,9 +23,9 @@ import { AppUiError } from '../../../core/models/app-ui-error.model';
             class="error-message__retry"
             type="button"
             (click)="retry.emit()"
-            aria-label="Retry"
+            [attr.aria-label]="'error.retry' | translate"
           >
-            Retry
+            {{ 'error.retry' | translate }}
           </button>
         }
       </div>

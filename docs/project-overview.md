@@ -27,13 +27,18 @@ A Progressive Web App (PWA) built with Angular 21 that allows users to search fo
 | INT-35 | Search with autocomplete and validation |
 | INT-36 | Display temperature, condition, wind, humidity, local time |
 | INT-37 | Clear messages on network/API failure |
-| INT-38 | Re-query weather from history |
+| INT-38 | Re-query weather from history (navigates to /weather after dispatch) |
 | INT-39 | Recent searches saved and listed |
+| INT-40 | Mark cities as favorites (NgRx slice + favorites button in detail view) |
+| INT-41 | View and remove favorites (FavoritesListComponent + page) |
 | INT-42 | Choose refresh interval (5/10/15/30 min) |
 | INT-43 | Smart refresh via lastUpdate + interval |
+| INT-44 | Table view default; row click dispatches selectCity + loadWeather + switches to detail |
 | INT-45 | Switch table vs detailed mode |
+| INT-46 | English and Spanish i18n via @ngx-translate/core; LanguageSwitcherComponent |
 | INT-47 | Responsive mobile/desktop layout |
 | INT-48 | Detailed view for selected city |
+| INT-49 | PWA offline access (service worker, manifest, OfflineBannerComponent) |
 
 ## API Endpoints
 - `GET /current.json?key=:key&q=:city` — Current weather
@@ -45,3 +50,4 @@ A Progressive Web App (PWA) built with Angular 21 that allows users to search fo
 | `weatherUpdateTimeInterval` | number (ms) | Selected refresh interval |
 | `weatherHistory` | JSON string | Array of HistoryEntry objects |
 | `weatherFavorites` | JSON string | Array of FavoriteEntry objects |
+| `appLanguage` | string | Selected language code ('en' or 'es') |
