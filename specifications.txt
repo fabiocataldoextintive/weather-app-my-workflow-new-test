@@ -1,0 +1,73 @@
+﻿Objetivo:
+Crear una aplicación en Angular que consuma la API de WeatherAPI (link: https://www.weatherapi.com/docs) y ofrezca una experiencia avanzada de usuario y optimización.
+Especificaciones:
+1. Funcionalidades principales:
+   1. Entrada del usuario:
+      * Un campo de texto con sugerencias automáticas (autocompletado) mientras el usuario escribe el nombre de una ciudad.
+      * Validaciones para entradas no válidas o vacías.
+   2. Resultados del clima:
+      * Mostrar:
+         * Temperatura actual en Celsius y Fahrenheit.
+         * Estado del clima (soleado, lluvioso, etc.).
+         * Ícono del estado del clima proporcionado por la API.
+         * Datos adicionales:
+            * Velocidad del viento.
+            * Humedad.
+            * Hora local de la ciudad.
+         * Mostrar un mensaje claro si no se encuentra la ciudad.
+   3. Historial de búsquedas:
+      * Guardar las búsquedas recientes en localStorage y mostrarlas en una lista interactiva.
+      * Permitir al usuario seleccionar una ciudad del historial para volver a consultar su clima.
+   4. Favoritos:
+      * Permitir al usuario marcar ciudades como favoritas.
+      * Mostrar una lista de favoritos persistente (usando localStorage o IndexedDB).
+      * Agregar la opción de eliminar ciudades de la lista de favoritos.
+   5. Modo de visualización:
+      * Vista de tabla: Mostrar los resultados de múltiples búsquedas recientes en forma de tabla con columnas para temperatura, estado y hora local.
+      * Vista detallada: Mostrar la información de una ciudad seleccionada en un diseño más visual.
+   6. Diseño responsivo:
+* Optimizar el diseño para dispositivos móviles y escritorio.
+* Usar flexbox o grid, lo que consideres mejor, para un diseño limpio.
+2. Requerimientos técnicos:
+   1. Arquitectura y optimización:
+      * Dividir la aplicación en módulos funcionales:
+▫        Clima: Componente para buscar y mostrar resultados.
+▫        Historial: Componente para manejar búsquedas recientes.
+▫        Favoritos: Componente para gestionar ciudades favoritas.
+      * Implementar lazy loading para módulos que no se usen de inmediato.
+      * Usar ChangeDetectionStrategy.OnPush para optimizar la detección de cambios.
+   2. Consumo de API:
+      * Usar un servicio Angular para interactuar con WeatherAPI:
+         * Endpoint /current.json para datos del clima actual.
+         * Endpoint /search.json para autocompletar nombres de ciudades.
+      * Manejar errores de red y mostrar mensajes claros al usuario.
+   3. Rendimiento:
+      * Implementar un mecanismo de cache para evitar múltiples llamadas al mismo endpoint (por ejemplo, usando un Map o RxJS con operadores como shareReplay).
+      * Usar paginación o carga diferida si el historial o favoritos crece mucho.
+   4. Estilización avanzada:
+* Usar SCSS con animaciones para mejorar la experiencia visual.
+* Crear un diseño limpio y profesional.
+5. Arquitectura:
+   * Modularidad y separación de responsabilidades.
+   * Uso eficiente de servicios, módulos y componentes.
+6. Optimización:
+   * Implementación de estrategias de optimización de rendimiento (Change Detection, caching, lazy loading).
+   * Uso avanzado de RxJS para manejar estados y datos asincrónicos.
+7. Consumo de API:
+   * Integración limpia y eficiente con WeatherAPI.
+   * Manejo robusto de errores y validaciones.
+8. UX/UI:
+   * Interfaz intuitiva, responsiva y atractiva.
+   * Indicadores de carga y feedback visual para el usuario.
+9. Código limpio:
+   * Uso de TypeScript avanzado (interfaces, genéricos, etc.).
+   * Buenas prácticas en el naming, estructura y documentación del código.
+10 Internacionalización:
+   * Agregar soporte para múltiples idiomas (por ejemplo, inglés y español).
+11 Pruebas unitarias:
+   * Escribir pruebas unitarias para el servicio de API y los componentes principales.
+12 PWA (Progressive Web App):
+   * Convertir la aplicación en una PWA con soporte offline para favoritos y el historial.
+13 Actualización del clima de una ciudad por intervalos:
+   * Debo poder elegir entre intervalos de 5, 10, 15, o 30 minutos, el intervalo que quiero que se actualicen los datos del clima de las ciudades que busque. Esto se debe poder hacer desde un pequeño listado, que esté ordenado de forma ascendente, y que esta información se guarde tanto en el estado de la app como en el localStorage con una key similar a ésta: "weatherUpdateTimeInterval". El valor de la key debe ser el número seleccionado. Éste listado debe aparecer debajo del buscador de ciudades. La app debe tomar el valor guardado en el estado de la app y/o en el localStorage, en milisegundos, y se debe ver reflejado como el intervalo actual seleccionado en el listado. Si no hay nada guardado en dichos lugares, por defecto, el listado debe tener seleccionado el intervalo de 5 minutos. Cuando se tenga que ver qué valor de intervalo corresponde qué intervalo en el listado, se debe comparar el valor guardado en milisegundos contra cada valor del listado del mismo tipo, es decir, milisegundos. El listado, debe estar guardado en un array, como una constante, de esta forma: [<valor-de-5-minutos-en-milisegundos>, <valor-de-10-minutos-en-milisegundos>, <valor-de-15-minutos-en-milisegundos>, <valor-de-30-minutos-en-milisegundos>].
+   * Cuando busco una ciudad "X" en el buscador, como va a ser la primera vez, se debe hacer una llamada a la API, al endpoint que corresponda. Ahora, todas las ciudades guardadas tanto en el historial como en mis favoritos, va a haber un dato extra tipo "string" que guarde el timestamp de la última consulta, con una key similar a: "lastUpdate". En sucesivas búsquedas, se debe buscar, en los datos de dicha ciudad, el dato "lastUpdate". Con esto, se debe calcular cuánto tiempo pasó, en milisegundos, desde la última vez que se actualizó el clima de la ciudad hasta este momento. Si dicha cantidad de tiempo es mayor al intervalo que elegí, se debe llamar al backend para actualizar los datos. Caso contrario, se deben mostrar los últimos datos guardados de dicha ciudad."
