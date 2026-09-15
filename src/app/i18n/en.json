@@ -1,0 +1,67 @@
+{
+  "nav": {
+    "weather": "Weather",
+    "history": "History",
+    "favorites": "Favorites"
+  },
+  "search": {
+    "placeholder": "Search for a city...",
+    "empty": "Please enter a city name",
+    "notFound": "No cities found",
+    "button": "Search"
+  },
+  "weather": {
+    "humidity": "Humidity",
+    "wind": "Wind",
+    "localTime": "Local Time",
+    "temperature": "Temperature",
+    "condition": "Condition",
+    "noData": "No weather data yet. Search for a city to get started.",
+    "viewTable": "Table",
+    "viewDetail": "Detail",
+    "backToTable": "Back",
+    "view": "View",
+    "windSpeed": "Wind Speed",
+    "windDirection": "Wind Direction",
+    "feelsLike": "Feels Like",
+    "cloudCover": "Cloud Cover",
+    "visibility": "Visibility",
+    "gustSpeed": "Gust Speed",
+    "uvIndex": "UV Index"
+  },
+  "history": {
+    "title": "Recent Searches",
+    "empty": "No recent searches yet.",
+    "loadMore": "Load more"
+  },
+  "favorites": {
+    "title": "My Favorites",
+    "empty": "No favorites yet.",
+    "add": "Add to Favorites",
+    "added": "Already in Favorites",
+    "remove": "Remove",
+    "loadMore": "Load more"
+  },
+  "interval": {
+    "label": "Auto-refresh interval",
+    "5min": "5 minutes",
+    "10min": "10 minutes",
+    "15min": "15 minutes",
+    "30min": "30 minutes"
+  },
+  "error": {
+    "network": "Network error. Please check your connection.",
+    "server": "Server error. Please try again later.",
+    "rateLimit": "Too many requests. Please wait.",
+    "notFound": "City not found.",
+    "unknown": "An unexpected error occurred.",
+    "retry": "Retry"
+  },
+  "offline": {
+    "banner": "You are offline. Showing cached data.",
+    "searchUnavailable": "Live search is unavailable offline."
+  },
+  "lang": {
+    "switchTo": "Español"
+  }
+}

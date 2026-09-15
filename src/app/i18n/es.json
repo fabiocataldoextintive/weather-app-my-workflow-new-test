@@ -1,0 +1,67 @@
+{
+  "nav": {
+    "weather": "Clima",
+    "history": "Historial",
+    "favorites": "Favoritos"
+  },
+  "search": {
+    "placeholder": "Buscar una ciudad...",
+    "empty": "Por favor ingresa el nombre de una ciudad",
+    "notFound": "No se encontraron ciudades",
+    "button": "Buscar"
+  },
+  "weather": {
+    "humidity": "Humedad",
+    "wind": "Viento",
+    "localTime": "Hora local",
+    "temperature": "Temperatura",
+    "condition": "Condición",
+    "noData": "Aún no hay datos del clima. Busca una ciudad para comenzar.",
+    "viewTable": "Tabla",
+    "viewDetail": "Detalle",
+    "backToTable": "Volver",
+    "view": "Vista",
+    "windSpeed": "Velocidad del viento",
+    "windDirection": "Dirección del viento",
+    "feelsLike": "Sensación térmica",
+    "cloudCover": "Nubosidad",
+    "visibility": "Visibilidad",
+    "gustSpeed": "Ráfaga",
+    "uvIndex": "Índice UV"
+  },
+  "history": {
+    "title": "Búsquedas recientes",
+    "empty": "Aún no hay búsquedas recientes.",
+    "loadMore": "Cargar más"
+  },
+  "favorites": {
+    "title": "Mis Favoritos",
+    "empty": "Aún no tienes favoritos.",
+    "add": "Agregar a Favoritos",
+    "added": "Ya está en Favoritos",
+    "remove": "Eliminar",
+    "loadMore": "Cargar más"
+  },
+  "interval": {
+    "label": "Intervalo de actualización",
+    "5min": "5 minutos",
+    "10min": "10 minutos",
+    "15min": "15 minutos",
+    "30min": "30 minutos"
+  },
+  "error": {
+    "network": "Error de red. Por favor verifica tu conexión.",
+    "server": "Error del servidor. Por favor intenta más tarde.",
+    "rateLimit": "Demasiadas solicitudes. Por favor espera.",
+    "notFound": "Ciudad no encontrada.",
+    "unknown": "Ocurrió un error inesperado.",
+    "retry": "Reintentar"
+  },
+  "offline": {
+    "banner": "Estás sin conexión. Mostrando datos en caché.",
+    "searchUnavailable": "La búsqueda en vivo no está disponible sin conexión."
+  },
+  "lang": {
+    "switchTo": "English"
+  }
+}
