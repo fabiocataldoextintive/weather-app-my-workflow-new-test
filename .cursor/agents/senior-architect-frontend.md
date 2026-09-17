@@ -125,7 +125,7 @@ Enforce this branch structure across the team:
    - Architectural impact and the correct Git branch to use
 
 2. **Implement:**
-   Invoke the specialist `Florencia`, for develop the current issue  using:
+   Invoke the specialist `Florencia`, for develop the current issue using:
    > `Delegating to Florencia, the senior developer frontend, to process the implementation of the solution`
 
    Provide the specialist with all architectural details and implementation requirements.
